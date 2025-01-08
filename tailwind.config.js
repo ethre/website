@@ -18,7 +18,7 @@ module.exports = {
         pulse: {
           '0%, 100%': { opacity: 1 },
           '50%': { opacity: 0.5 },
-          
+        }, // Fix this missing closing brace
       },
       animation: {
         blink: 'blink 1s infinite ease-in-out',
@@ -26,8 +26,7 @@ module.exports = {
         pulse: 'pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
       },
       fontFamily: {
-        bebas: ['"Bebas Neue"'], // Add Bebas Neue
-      },
+        bebas: ['"Bebas Neue"'],
       },
       colors: {
         primary: '#1A202C',
