@@ -1,0 +1,788 @@
+/* === Tailwind Directives === */
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* === Base Styles === */
+
+* {
+  caret-color: transparent; /* Hide the caret */
+}
+
+#footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  font-size: 12px; /* Make the text invisible */
+  pointer-events: none; /* Prevent interaction */
+}
+
+#footer span {
+  height: 1px;
+  width: 1px;
+}
+
+/* === Custom Utilities & Defaults === */
+/* Example link hover transitions */
+a {
+  @apply text-gray-300 hover:text-white transition duration-200 ease-in-out;
+}
+
+/* Group link styling */
+.group a {
+  @apply text-white font-bold;
+}
+.group-hover a {
+  @apply text-gray-400;
+}
+
+/* Basic sections spacing */
+section {
+  @apply py-16;
+  scroll-margin-top: 80px; /* Let anchored sections account for fixed nav */
+}
+
+/* Smooth scrolling for the HTML doc */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Cursor blinking animation */
+.cursor {
+  display: inline-block;
+  width: 1px;
+  height: 1.5em;
+  background-color: black;
+  animation: smooth-blink 1s infinite ease-in-out;
+}
+@keyframes smooth-blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+/* Selection highlight */
+::selection {
+  background-color: black;
+  color: white;
+  opacity: 1;
+}
+::-moz-selection {
+  background-color: black;
+  color: white;
+  opacity: 1;
+}
+
+/* Navigation links */
+nav a {
+  color: black;
+  transition: color 0.3s ease;
+}
+nav a:hover {
+  color: grey;
+}
+nav a.active {
+  color: black;
+  font-weight: bold;
+  border-bottom: 2px solid black;
+}
+
+nav {
+  position: relative;
+  padding: 70px; /* Adjust padding as needed */
+}
+
+/* Feathering effect at the bottom */
+nav::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 20px; /* Height of the feathering effect */
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0), #ffffff);
+  pointer-events: none; /* Ensure it doesn't interfere with interactivity */
+}
+
+.name-container {
+  position: absolute; /* Position it separately */
+  top: 35px; /* Move it above the navbar */
+  left: 50%;
+  transform: translateX(-50%); /* Center it horizontally */
+  text-align: center;
+  z-index: 50; /* Ensure it stays above other elements */
+}
+
+.social-icons {
+  position: absolute;
+  top: 170px; /* Space between the name and the navbar */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 50;
+}
+
+.gallery-container {
+  position: absolute; /* Position it separately */
+  top: 35px; /* Move it above the navbar */
+  left: 50%;
+  transform: translateX(-50%); /* Center it horizontally */
+  text-align: center;
+  z-index: 50; /* Ensure it stays above other elements */
+}
+
+/* Overlay close button default styles */
+button {
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+/* Gallery images responsiveness & hover scale */
+#galleryOverlay img {
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+#galleryOverlay img:hover {
+  transform: scale(1.05);
+}
+
+/* Overlays (Contact, About) backgrounds & form input styles */
+#contactOverlay,
+#aboutOverlay {
+  background-color: white; /* White background for overlays */
+}
+#contactOverlay input,
+#contactOverlay textarea,
+#aboutOverlay input,
+#aboutOverlay textarea {
+  border-radius: 1px;
+  padding: 12px;
+  font-size: 10px;
+}
+#contactOverlay button,
+#aboutOverlay button {
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+/* Optional close button styling */
+.buttonClose {
+  border-radius: 1px;
+  border-color: black;
+}
+
+/* More selection rules (merging them with above) */
+::selection {
+  background: rgba(0, 0, 0, 1);
+  text-shadow: none;
+}
+::-moz-selection {
+  background: rgba(0, 0, 0, 0.1);
+  text-shadow: none;
+}
+
+/* === Overlay Animations (Tailwind "apply" + custom) === */
+@layer components {
+  /*
+     .overlayBase:
+       - fixed center
+       - half viewport
+       - hidden + scale-50 + opacity-0
+       - transitions to scale-100 + opacity-100
+  */
+  .overlayBase {
+    @apply fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 
+           w-1/2 h-1/2 bg-white border border-black 
+           hidden opacity-0 scale-50 
+           transition-all duration-500 ease-in-out;
+    z-index: 100; /* or a high number so it’s on top */
+  }
+  .show {
+    @apply opacity-100 scale-100;
+    display: block !important; /* ensure it's visible */
+  }
+}
+
+/* (If you need a full overlay variant) */
+.overlayBaseFull {
+  @apply fixed inset-0 z-[100] hidden bg-black bg-opacity-75 flex items-center justify-center 
+         opacity-0 scale-95 transition-all duration-300 ease-in-out;
+}
+.showFull {
+  @apply opacity-100 scale-100;
+}
+
+/* === Loading Screen === */
+#loadingScreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #000; /* or any color */
+  z-index: 9999; /* highest to cover everything */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  opacity: 1;
+  transition: opacity 0.8s ease-out;
+}
+#loadingScreen.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+#lorenzCanvas {
+  width: 100vw;
+  height: 100vh;
+  display: block;
+}
+#mainContent {
+  opacity: 0; /* start invisible */
+  transition: opacity 2s ease-out;
+}
+#mainContent.visible {
+  opacity: 1; /* fade in */
+}
+
+/* === Hero (Particle Container) Example === */
+#hero {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  border: 2px solid black; /* "hard border" */
+  overflow: hidden; /* keeps particles inside */
+}
+#particleCanvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.hero-content {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #333;
+  pointer-events: none; /* so hero can capture mousedown behind text */
+}
+.hero-content h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+.hero-content p {
+  max-width: 600px;
+  text-align: center;
+  margin: 0 auto;
+  font-size: 1.25rem;
+  color: #555;
+}
+
+/* === Fade-in Keyframe === */
+.animate-fade {
+  animation: fadeIn 0.75s ease forwards;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Loading screen covers the window */
+#loadingScreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #000;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 1;
+  transition: opacity 0.8s ease-out;
+}
+#loadingScreen.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Canvas for the initial loading attractor */
+#lorenzCanvas {
+  width: 100vw;
+  height: 100vh;
+  display: block;
+}
+
+/* Main content hidden initially, then faded in */
+#mainContent {
+  opacity: 0;
+  transition: opacity 0.8s ease-out;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#mainContent.visible {
+  opacity: 1;
+}
+
+/* ====== Lorenz Overlay ====== */
+/* Fullscreen overlay that re-opens the Lorenz attractor on demand */
+#lorenzOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.9); /* dark background */
+  z-index: 9999;
+  display: none; /* hidden by default */
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition: opacity 0.5s ease;
+  opacity: 0;
+}
+#lorenzOverlay.show {
+  display: flex;
+  opacity: 1;
+}
+
+/* Overlay close button */
+#lorenzOverlayClose {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  color: #fff;
+  border: none;
+  font-size: 1.2rem;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+/* The second Lorenz canvas, for the overlay */
+#lorenzOverlayCanvas {
+  width: 100vw;
+  height: 100vh;
+  display: block;
+}
+
+/* Roboto Fonts */
+.roboto-thin {
+  font-family: "Roboto", serif;
+  font-weight: 100;
+  font-style: normal;
+}
+
+.roboto-light {
+  font-family: "Roboto", serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.roboto-regular {
+  font-family: "Roboto", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.roboto-medium {
+  font-family: "Roboto", serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.roboto-bold {
+  font-family: "Roboto", serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.roboto-black {
+  font-family: "Roboto", serif;
+  font-weight: 900;
+  font-style: normal;
+}
+
+.roboto-thin-italic {
+  font-family: "Roboto", serif;
+  font-weight: 100;
+  font-style: italic;
+}
+
+.roboto-light-italic {
+  font-family: "Roboto", serif;
+  font-weight: 300;
+  font-style: italic;
+}
+
+.roboto-regular-italic {
+  font-family: "Roboto", serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.roboto-medium-italic {
+  font-family: "Roboto", serif;
+  font-weight: 500;
+  font-style: italic;
+}
+
+.roboto-bold-italic {
+  font-family: "Roboto", serif;
+  font-weight: 700;
+  font-style: italic;
+}
+
+.roboto-black-italic {
+  font-family: "Roboto", serif;
+  font-weight: 900;
+  font-style: italic;
+}
+
+/* General reset */
+body,
+html {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background: black;
+}
+
+/* Canvas styling */
+canvas {
+  display: block;
+}
+
+/* Loading Screen Styling */
+#loadingScreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  opacity: 1;
+  transition: opacity 0.8s ease;
+}
+
+#loadingScreen.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Main Content Styling */
+#mainContent {
+  display: none;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+
+#mainContent.visible {
+  display: block;
+  opacity: 1;
+}
+
+/* Lorenz Overlay Styling */
+#lorenzOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.95);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+#lorenzOverlay.show {
+  display: flex;
+}
+
+.link-underline {
+  border-bottom-width: 0;
+  background-image: linear-gradient(transparent, transparent),
+    linear-gradient(#000000, #bdbdbd);
+  background-size: 0 1px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 0.5s ease-in-out;
+}
+
+.link-underline-black {
+  background-image: linear-gradient(transparent, transparent),
+    linear-gradient(#f2c, #f2c);
+}
+
+.link-underline:hover {
+  background-size: 100% 1px;
+  background-position: 0 100%;
+}
+
+.libre-regular {
+  font-family: "Libre Franklin", sans-serif;
+  font-weight: 400; /* Regular */
+}
+
+.libre-bold {
+  font-family: "Libre Franklin", sans-serif;
+  font-weight: 700; /* Regular */
+}
+
+/* gallery  */
+
+*,
+*:before,
+*:after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  background: #ecf0f1;
+}
+
+.wrapper {
+  max-width: 75rem;
+  padding: 2rem;
+  margin: 0 auto;
+}
+
+/* Gallery */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 2fr);
+  grid-template-rows: repeat(5, 12.5rem);
+  gap: 0.5rem;
+}
+
+/* Gallery Layout */
+.gallery__item--1 {
+  grid-column: 1 / span 1;
+  grid-row: 1 / span 1;
+}
+
+.gallery__item--2 {
+  grid-column: 1 / span 1;
+  grid-row: 2 / span 1;
+}
+
+.gallery__item--3 {
+  grid-column: 2 / span 1;
+  grid-row: 1 / span 2;
+}
+
+.gallery__item--4 {
+  grid-column: 3 / span 1;
+  grid-row: 1 / span 3;
+}
+
+.gallery__item--5 {
+  grid-column: 1 / span 2;
+  grid-row: 3 / span 2;
+}
+
+.gallery__item--6 {
+  grid-column: 3 / span 1;
+  grid-row: 4 / span 2;
+}
+
+.gallery__item--7 {
+  grid-column: 1 / span 2;
+  grid-row: 5 / span 1;
+}
+
+.gallery__item--8 {
+  grid-column: 3 / span 1;
+  grid-row: 5 / span 1;
+}
+/* Gallery Link */
+.gallery__link {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* Gallery Link Overlay */
+.gallery__overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(0, 0, 0, 0.4);
+  font-size: 1.5rem;
+  color: #fff;
+  font-weight: 700;
+  text-transform: uppercase;
+
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+}
+
+.gallery__link:hover .gallery__overlay {
+  opacity: 1;
+}
+
+/* Gallery Overlay Text */
+.gallery__overlay span {
+  position: relative;
+  line-height: 3rem;
+}
+
+.gallery__overlay span:before,
+.gallery__overlay span:after {
+  content: "";
+  position: absolute;
+  height: 2px;
+  width: 0;
+  background: #fff;
+  transition: width 0.3s ease-out 0.2s;
+}
+
+.gallery__overlay span:before {
+  top: 0;
+  left: 0;
+}
+
+.gallery__overlay span:after {
+  bottom: 0;
+  right: 0;
+}
+
+.gallery__link:hover .gallery__overlay span:before,
+.gallery__link:hover .gallery__overlay span:after {
+  width: 100%;
+}
+
+/* Gallery Image */
+.gallery__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.05);
+  transition: transform 0.5s, filter 0.5s;
+}
+
+.gallery__link:hover .gallery__image {
+  transform: scale(1.2);
+  filter: blur(2px);
+}
+
+@media screen and (max-width: 60rem) {
+  .wrapper {
+    padding: 1rem;
+  }
+
+  .gallery {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Gallery Layout */
+  .gallery__item--1 {
+    grid-column: 1 / span 1;
+    grid-row: 1 / span 1;
+  }
+
+  .gallery__item--2 {
+    grid-column: 1 / span 1;
+    grid-row: 2 / span 1;
+  }
+
+  .gallery__item--3 {
+    grid-column: 2 / span 1;
+    grid-row: 1 / span 2;
+  }
+
+  .gallery__item--4 {
+    grid-column: 1 / span 1;
+    grid-row: 3 / span 2;
+  }
+
+  .gallery__item--5 {
+    grid-column: 2 / span 1;
+    grid-row: 3 / span 1;
+  }
+
+  .gallery__item--6 {
+    grid-column: 2 / span 1;
+    grid-row: 4 / span 1;
+  }
+
+  .gallery__item--7 {
+    grid-column: 1 / span 1;
+    grid-row: 5 / span 1;
+  }
+
+  .gallery__item--8 {
+    grid-column: 2 / span 1;
+    grid-row: 5 / span 2;
+  }
+
+  .gallery__overlay {
+    font-size: 1.25rem;
+  }
+}
+
+@media screen and (max-width: 35rem) {
+  .gallery {
+    display: block;
+  }
+
+  .gallery__item {
+    margin: 0.5rem;
+  }
+
+  .gallery__link {
+    height: 80vw;
+  }
+
+  .gallery__overlay {
+    font-size: 1rem;
+  }
+}
+
+.gradient-text {
+  background: linear-gradient(to right, black, #4e585f);
+  -webkit-background-clip: text; /* Applies the gradient to the text */
+  -webkit-text-fill-color: transparent; /* Makes the background visible inside the text */
+  text-fill-color: transparent; /* Fallback for non-Webkit browsers */
+}
