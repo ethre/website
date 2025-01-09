@@ -19,7 +19,6 @@ function closeContact() {
   overlay.classList.remove("show");
 }
 
-
 /*********************************************/
 /*  Fullscreen Image Modal                   */
 /*********************************************/
@@ -37,6 +36,7 @@ function openImageModal(imgEl) {
   modal.classList.add("opacity-100", "scale-100");
 }
 
+// Close the image modal
 function closeImageModal() {
   const modal = document.getElementById("imageModal");
   const fullImg = document.getElementById("fullscreenImg");
@@ -49,6 +49,9 @@ function closeImageModal() {
   }, 300);
 }
 
+/*********************************************/
+/*  Photography Overlay                      */
+/*********************************************/
 function openPhotography() {
   const overlay = document.getElementById("photographyOverlay");
   overlay.classList.remove("hidden");
@@ -64,12 +67,27 @@ function closePhotography() {
   setTimeout(() => overlay.classList.add("hidden"), 500);
 }
 
+/*********************************************/
+/*  Handle Keydown Events                    */
+/*********************************************/
+function handleKeydown(event) {
+  if (event.key === "Escape") { // Check if the Escape key was pressed
+    const modal = document.getElementById("imageModal");
+
+    // Close image modal if it's open
+    if (!modal.classList.contains("hidden")) {
+      closeImageModal();
+    }
+  }
+}
+
+// Attach the keydown event listener to the document
+document.addEventListener("keydown", handleKeydown);
+
 // Ensure that openPhotography() is called when you click on the 
 // "Photography" navbar link, just like you do with openGallery().
 
-
-
-// Expose them globally if needed in inline onClick attributes
+// Expose functions globally if needed for inline onClick attributes
 window.openAbout = openAbout;
 window.closeAbout = closeAbout;
 window.openContact = openContact;

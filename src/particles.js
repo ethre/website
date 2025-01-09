@@ -21,7 +21,7 @@
     /*              Particle Setup              */
     /********************************************/
     const particles = [];
-    const particleCount = 85;
+    const particleCount = 75;
     const connectionDistance = 200;
 
     // Mouse object:
