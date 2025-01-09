@@ -21,8 +21,8 @@
     /*              Particle Setup              */
     /********************************************/
     const particles = [];
-    const particleCount = 70;
-    const connectionDistance = 250;
+    const particleCount = 85;
+    const connectionDistance = 200;
 
     // Mouse object:
     // - isDown: if mouse button is pressed
@@ -31,7 +31,7 @@
     const mouse = {
       x: null,
       y: null,
-      radius: 50,   // repulsion distance
+      radius: 500,   // repulsion distance
       isDown: false,
       downTime: 0
     };
@@ -125,7 +125,7 @@
 
             // If in attract mode, add a mild pull
             if (inAttractMode) {
-              const attractFactor = 0.005; 
+              const attractFactor = 0.001; 
               p.vx -= attractFactor * dx;
               p.vy -= attractFactor * dy;
             }
@@ -145,7 +145,7 @@
           const dy2 = p.y - q.y;
           const dist2 = Math.sqrt(dx2 * dx2 + dy2 * dy2);
           if (dist2 < connectionDistance) {
-            const lineOpacity = 0.4 * (1 - dist2 / connectionDistance);
+            const lineOpacity = 1 * (1 - dist2 / connectionDistance);
             ctx.beginPath();
             ctx.moveTo(p.x, p.y);
             ctx.lineTo(q.x, q.y);

@@ -2,7 +2,13 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <meta name="theme-color" content="#000000" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
     <title>rad.gre</title>
     <link
       rel="icon"
@@ -13,7 +19,6 @@
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap"
       rel="stylesheet"
     />
-
     <link
       href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;700&display=swap"
       rel="stylesheet"
@@ -22,15 +27,13 @@
       href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.0/dist/tailwind.min.css"
       rel="stylesheet"
     />
-
-    <!-- Your own custom CSS -->
     <link href="./src/index.css" rel="stylesheet" />
     <link
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
       rel="stylesheet"
     />
 
-    <!-- JS Modules (defer) -->
+    <!-- JS Modules -->
     <script src="./src/smooth-scroll.js" type="module" defer></script>
     <script src="./src/typewriter.js" type="module" defer></script>
     <script src="./src/nav.js" type="module" defer></script>
@@ -38,33 +41,30 @@
     <script src="./src/attractor.js" type="module" defer></script>
   </head>
 
-  <body class="bg-white text-black animate-fade relative">
-    <!-- ===== Lorenz Loading Screen ===== -->
+  <body class="bg-white text-black animate-fade relative no-select">
+    <!-- Loading Screen -->
     <div id="loadingScreen">
       <canvas id="lorenzCanvas"></canvas>
     </div>
 
-    <!-- 3) Fullscreen Lorenz Overlay -->
+    <!-- Lorenz Overlay -->
     <div id="lorenzOverlay">
       <button id="lorenzOverlayClose" class="hover:animate-pulse">X</button>
       <canvas id="lorenzOverlayCanvas"></canvas>
     </div>
 
-    <!-- ===== Particle Canvas Container ===== -->
+    <!-- Particle Canvas -->
     <div id="particleContainer">
       <canvas id="particleCanvas"></canvas>
     </div>
 
-    <!-- ===== Navbar ===== -->
+    <!-- Navbar -->
     <nav class="grid fixed top-0 left-0 w-full z-40">
-      <!-- Logo/Name Section -->
       <div class="name-container font-bold roboto-black text-2xl">
         RADOSLAW GREPLOWSKI
       </div>
 
-      <!-- Social Media Icons -->
       <div class="social-icons flex justify-center space-x-4 mt-2">
-        <!-- Twitter -->
         <a
           href="https://twitter.com"
           target="_blank"
@@ -72,7 +72,6 @@
         >
           <i class="fab fa-twitter"></i>
         </a>
-        <!-- Instagram -->
         <a
           href="https://instagram.com"
           target="_blank"
@@ -80,7 +79,6 @@
         >
           <i class="fab fa-instagram"></i>
         </a>
-        <!-- LinkedIn -->
         <a
           href="https://linkedin.com"
           target="_blank"
@@ -91,41 +89,36 @@
       </div>
 
       <div class="flex flex-col justify-center items-center py-8 px-8">
-        <!-- Navigation Links -->
         <div class="space-x-6">
           <a
             href="javascript:void(0)"
             class="text-black transition text-s link-underline"
             onclick="openAbout()"
+            >About</a
           >
-            About
-          </a>
           <a
             href="javascript:void(0)"
             class="text-black transition text-s link-underline"
             onclick="openPhotography()"
+            >Photography</a
           >
-            Photography
-          </a>
           <a
             href="javascript:void(0)"
             class="text-black transition text-s link-underline"
             onclick="openContact()"
+            >Contact</a
           >
-            Contact
-          </a>
           <a
             href="#"
             id="openLorenzButton"
             class="text-black link-underline transition text-s"
+            >Lorenz Attractor</a
           >
-            Lorenz Attractor
-          </a>
         </div>
       </div>
     </nav>
 
-    <!-- ===== Hero Section ===== -->
+    <!-- Hero Section -->
     <section
       id="hero"
       class="h-screen flex flex-col justify-center items-center text-center space-y-6 pt-16 text-lgs"
@@ -136,35 +129,31 @@
       </h1>
     </section>
 
-    <!-- ===== Background Canvas (Optional) ===== -->
+    <!-- Background Canvas -->
     <canvas
       id="networkBackground"
       class="fixed top-0 left-0 w-full h-full -z-10"
     ></canvas>
 
-    <!-- ===== About Overlay ===== -->
+    <!-- About Overlay -->
     <div id="aboutOverlay" class="overlayBase z-50">
       <div class="w-50 h-full grid grid-cols-2 animate-fade">
-        <!-- Left half -->
         <div class="flex items-center justify-center p-8 bg-gray-100">
           <img src="./src/assets/ryx.png" alt="My Photo" class="w-4/5 pb-8" />
         </div>
-        <!-- Right half -->
         <div class="flex items-center justify-center p-8 bg-white relative">
           <div class="text-center">
             <h2 class="text-4xl roboto-black mb-4">ABOUT ME</h2>
             <br />
             <p class="text-black text-left">
-              I’m studying <i><b>Theoretical Physics</b></i> at Trinity College
+              I'm studying <i><b>Theoretical Physics</b></i> at Trinity College
               Dublin. Alongside exploring the world of physics, I have a strong
               interest in <b>coding</b>, especially in areas related to
               <b>Data Science</b> and <b>Statistics</b>. I love building
-              projects that uncover patterns and insights from data. When I’m
-              not experimenting with code or physics problems, you’ll likely
+              projects that uncover patterns and insights from data. When I'm
+              not experimenting with code or physics problems, you'll likely
               find me taking photos—capturing the world through my lens—or
-              indulging in music creation. Whether it’s composing melodies or
-              exploring new photographic perspectives, I’m always excited by
-              opportunities to blend science, art, and technology.
+              indulging in music creation.
             </p>
             <br />
             <p class="text-black text-left">
@@ -173,12 +162,9 @@
               complex mathematical and statistical computations into my
               projects. I specialize in building robust, scalable web
               applications using frameworks like Django and Flask, crafting
-              solutions that are both functional and user-centric. Whether it's
-              managing databases, creating APIs, or streamlining workflows, I
-              thrive at turning ideas into impactful digital experiences.
+              solutions that are both functional and user-centric.
             </p>
           </div>
-          <!-- Close button -->
           <button
             class="absolute top-4 right-4 text-gray-700 p-2 rounded-full hover:animate-pulse"
             onclick="closeAbout()"
@@ -189,7 +175,7 @@
       </div>
     </div>
 
-    <!-- ===== Photography Overlay (With Navigation Arrows) ===== -->
+    <!-- Photography Overlay -->
     <div
       id="photographyOverlay"
       class="overlayBase hidden animate-fade h-full w-full"
@@ -200,7 +186,7 @@
       >
         X
       </button>
-      <br /><br />><br />><br />
+      <br /><br /><br /><br />
       <div class="gallery-container roboto-bold text-xl">TINY GALLERY</div>
       <div class="wrapper">
         <div class="gallery">
@@ -210,10 +196,9 @@
                 src="./src/assets/photo7.jpg"
                 class="gallery__image"
                 onclick="openImageModal(this)"
+                alt="The Lighthouse"
               />
-              <div class="gallery__overlay">
-                <span>A</span>
-              </div>
+              <div class="gallery__overlay"><span>The Lighthouse</span></div>
             </a>
           </div>
           <div class="gallery__item gallery__item--2">
@@ -222,10 +207,9 @@
                 src="./src/assets/photo2.jpg"
                 class="gallery__image"
                 onclick="openImageModal(this)"
+                alt="Field"
               />
-              <div class="gallery__overlay">
-                <span>B</span>
-              </div>
+              <div class="gallery__overlay"><span>Field</span></div>
             </a>
           </div>
           <div class="gallery__item gallery__item--3">
@@ -234,80 +218,63 @@
                 src="./src/assets/photo3.jpg"
                 class="gallery__image"
                 onclick="openImageModal(this)"
+                alt="Looming"
               />
-              <div class="gallery__overlay">
-                <span>C</span>
-              </div>
+              <div class="gallery__overlay"><span>Looming</span></div>
             </a>
           </div>
           <div class="gallery__item gallery__item--4">
             <a href="#" class="gallery__link">
               <img
-                src="./src/assets/photo4.jpg"
+                src="./src/assets/photo5.jpg"
                 class="gallery__image"
                 onclick="openImageModal(this)"
+                alt="Peace"
               />
-              <div class="gallery__overlay">
-                <span>D</span>
-              </div>
+              <div class="gallery__overlay"><span>Peace</span></div>
             </a>
           </div>
           <div class="gallery__item gallery__item--5">
             <a href="#" class="gallery__link">
               <img
-                src="./src/assets/photo8.jpg"
+                src="./src/assets/photo6.jpg"
                 class="gallery__image"
                 onclick="openImageModal(this)"
+                alt="Webbed Branch"
               />
-              <div class="gallery__overlay">
-                <span>E</span>
-              </div>
+              <div class="gallery__overlay"><span>Webbed Branch</span></div>
             </a>
           </div>
           <div class="gallery__item gallery__item--6">
             <a href="#" class="gallery__link">
               <img
-                src="./src/assets/photo5.jpg"
+                src="./src/assets/photo8.jpg"
                 class="gallery__image"
                 onclick="openImageModal(this)"
+                alt="Heron"
               />
-              <div class="gallery__overlay">
-                <span>F</span>
-              </div>
+              <div class="gallery__overlay"><span>Heron</span></div>
             </a>
           </div>
           <div class="gallery__item gallery__item--7">
             <a href="#" class="gallery__link">
               <img
-                src="./src/assets/photo5.jpg"
+                src="./src/assets/photo4.jpg"
                 class="gallery__image"
                 onclick="openImageModal(this)"
+                alt="Great Sugar Loaf"
               />
-              <div class="gallery__overlay">
-                <span>G</span>
-              </div>
+              <div class="gallery__overlay"><span>Great Sugar Loaf</span></div>
             </a>
           </div>
-          <!--<div class="gallery__item gallery__item--8">
-            <a href="#" class="gallery__link">
-              <img
-                src="./src/assets/photo5.jpg"
-                class="gallery__image"
-                onclick="openImageModal(this)"
-              />
-              <div class="gallery__overlay">
-                <span>F</span>
-              </div>
-            </a>
-          </div>-->
         </div>
       </div>
     </div>
 
-    <!-- ===== Contact Overlay ===== -->
+    <!-- Contact Overlay -->
     <div
       id="contactOverlay"
-      class="overlayBase animate-fade w-1/3 h-auto p-6 bg-white shadow-lg rounded-lg animate-fade"
+      class="overlayBase animate-fade w-1/3 h-auto p-6 bg-white shadow-lg rounded-lg"
     >
       <div
         class="w-full h-full flex flex-col items-center justify-center p-4 relative"
@@ -328,13 +295,12 @@
           Contact me either directly through email or find me below on social
           media!
         </p>
-        <a href="#" class="text-gray-600 mb-4 hover:text-black"
+        <a
+          href="mailto:greplowr@tcd.ie"
+          class="text-gray-600 mb-4 hover:text-black"
           >greplowr@tcd.ie</a
         >
-
-        <!-- Social Media Icons -->
         <div class="flex space-x-6">
-          <!-- Twitter -->
           <a
             href="https://twitter.com"
             target="_blank"
@@ -342,7 +308,6 @@
           >
             <i class="fab fa-twitter"></i>
           </a>
-          <!-- Instagram -->
           <a
             href="https://instagram.com"
             target="_blank"
@@ -350,7 +315,6 @@
           >
             <i class="fab fa-instagram"></i>
           </a>
-          <!-- LinkedIn -->
           <a
             href="https://linkedin.com"
             target="_blank"
@@ -362,7 +326,7 @@
       </div>
     </div>
 
-    <!-- ===== Fullscreen Image Modal ===== -->
+    <!-- Image Modal -->
     <div
       id="imageModal"
       class="fixed inset-0 z-[9999] hidden opacity-0 scale-95 bg-black bg-opacity-100 flex items-center justify-center transition-all duration-300 ease-in-out"
@@ -380,8 +344,9 @@
         alt="Fullscreen"
       />
     </div>
+
     <footer id="footer">
-      <span> &copy; All rights reserved 2025</span>
+      <span>&copy; All rights reserved 2025</span>
     </footer>
   </body>
 </html>
