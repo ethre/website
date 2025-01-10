@@ -23,15 +23,14 @@ function closeContact() {
 /*  Fullscreen Image Modal                   */
 /*********************************************/
 function openImageModal(imgEl) {
+  console.log("Image clicked:", imgEl.src);
   const modal = document.getElementById("imageModal");
   const fullImg = document.getElementById("fullscreenImg");
 
-  // Use data-full if available, else use the same src
-  const fullSrc = imgEl.getAttribute("data-full") || imgEl.src;
-  fullImg.src = fullSrc;
+  fullImg.src = imgEl.src; // Set the clicked image's src to the fullscreen image
 
   modal.classList.remove("hidden");
-  void modal.offsetWidth;
+  void modal.offsetWidth; // Trigger reflow for animation
   modal.classList.remove("opacity-0", "scale-95");
   modal.classList.add("opacity-100", "scale-100");
 }
@@ -96,3 +95,4 @@ window.openImageModal = openImageModal;
 window.closeImageModal = closeImageModal;
 window.openPhotography = openPhotography;
 window.closePhotography = closePhotography;
+

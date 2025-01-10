@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta
       name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
     />
     <meta name="theme-color" content="#000000" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -88,30 +88,32 @@
         </a>
       </div>
 
-      <div class="flex flex-col justify-center items-center py-8 px-8">
+      <div
+        class="flex flex-col justify-center items-center py-8 px-8 nav_text_container"
+      >
         <div class="space-x-6">
           <a
             href="javascript:void(0)"
-            class="text-black transition text-s link-underline"
+            class="text-black transition text-s link-underline nav_text_container"
             onclick="openAbout()"
             >About</a
           >
           <a
             href="javascript:void(0)"
-            class="text-black transition text-s link-underline"
+            class="text-black transition text-s link-underline nav_text_container"
             onclick="openPhotography()"
             >Photography</a
           >
           <a
             href="javascript:void(0)"
-            class="text-black transition text-s link-underline"
+            class="text-black transition text-s link-underline nav_text_container"
             onclick="openContact()"
             >Contact</a
           >
           <a
             href="#"
             id="openLorenzButton"
-            class="text-black link-underline transition text-s"
+            class="text-black link-underline transition text-s nav_text_container"
             >Lorenz Attractor</a
           >
         </div>
@@ -136,7 +138,13 @@
     ></canvas>
 
     <!-- About Overlay -->
-    <div id="aboutOverlay" class="overlayBase z-50">
+    <div id="aboutOverlay" class="overlayBase z-50 hide-scrollbar">
+      <button
+        class="mobile-only buttonAboutMe absolute top-4 right-4 text-gray-700 p-2 rounded-full hover:animate-pulse"
+        onclick="closeAbout()"
+      >
+        X
+      </button>
       <div class="w-50 h-full grid grid-cols-2 animate-fade">
         <div class="flex items-center justify-center p-8 bg-gray-100">
           <img src="./src/assets/ryx.png" alt="My Photo" class="w-4/5 pb-8" />
@@ -166,7 +174,7 @@
             </p>
           </div>
           <button
-            class="absolute top-4 right-4 text-gray-700 p-2 rounded-full hover:animate-pulse"
+            class="hideForMobile absolute top-4 right-4 text-gray-700 p-2 rounded-full hover:animate-pulse"
             onclick="closeAbout()"
           >
             X
@@ -178,10 +186,10 @@
     <!-- Photography Overlay -->
     <div
       id="photographyOverlay"
-      class="overlayBase hidden animate-fade h-full w-full"
+      class="hide-scrollbar overlayBase hidden animate-fade h-full w-full"
     >
       <button
-        class="absolute top-4 right-4 text-gray-700 p-2 rounded-full hover:animate-pulse"
+        class="buttonAboutMe absolute top-4 right-4 text-gray-700 p-2 rounded-full hover:animate-pulse"
         onclick="closePhotography()"
       >
         X
@@ -280,7 +288,7 @@
         class="w-full h-full flex flex-col items-center justify-center p-4 relative"
       >
         <button
-          class="absolute top-4 right-4 text-gray-700 p-2 rounded-full hover:animate-pulse"
+          class="buttonContactMe absolute top-4 right-4 text-gray-700 p-2 rounded-full hover:animate-pulse"
           onclick="closeContact()"
         >
           X

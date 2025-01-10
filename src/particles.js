@@ -5,6 +5,12 @@
     const canvas = document.getElementById('particleCanvas');
     const ctx = canvas.getContext('2d');
 
+    function isMobile() {
+      return window.innerWidth <= 800; // Define "mobile" as a screen width of 768px or less
+  }
+
+  // Smaller scale for mobile to reduce distance
+
     let heroWidth = hero.clientWidth;
     let heroHeight = hero.clientHeight;
 
@@ -21,8 +27,8 @@
     /*              Particle Setup              */
     /********************************************/
     const particles = [];
-    const particleCount = 75;
-    const connectionDistance = 200;
+    const particleCount = isMobile() ? 20 : 100; // Fewer points for mobile
+    const connectionDistance = isMobile() ? 125 : 200;
 
     // Mouse object:
     // - isDown: if mouse button is pressed
