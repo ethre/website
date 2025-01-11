@@ -119,17 +119,18 @@ function drawGrid(ctx, scale, width, height, centerX, centerY) {
 function drawAxesLabels(ctx, width, height) {
     ctx.font = "12px monospace";
     ctx.fillStyle = "rgba(255, 255, 255, 0.7)";
-    ctx.textAlign = "right";
-    
-    // Parameters
-    ctx.fillText(`σ: ${sigma.toFixed(2)}`, width - 10, 20);
-    ctx.fillText(`ρ: ${rho.toFixed(2)}`, width - 10, 40);
-    ctx.fillText(`β: ${beta.toFixed(2)}`, width - 10, 60);
-    
-    // Current point
-    ctx.fillText(`x: ${x.toFixed(2)}`, width - 10, height - 60);
-    ctx.fillText(`y: ${y.toFixed(2)}`, width - 10, height - 40);
-    ctx.fillText(`z: ${z.toFixed(2)}`, width - 10, height - 20);
+    ctx.textAlign = "left";
+
+    // Parameters on the top-left
+    ctx.fillText(`σ: ${sigma.toFixed(2)}`, 10, 20);
+    ctx.fillText(`ρ: ${rho.toFixed(2)}`, 10, 40);
+    ctx.fillText(`β: ${beta.toFixed(2)}`, 10, 60);
+
+    // Current point on the bottom-left
+    const padding = 10;
+    ctx.fillText(`x: ${x.toFixed(2)}`, padding, height - 60);
+    ctx.fillText(`y: ${y.toFixed(2)}`, padding, height - 40);
+    ctx.fillText(`z: ${z.toFixed(2)}`, padding, height - 20);
 }
 
 function updateLorenz() {
@@ -189,7 +190,7 @@ function updateLorenz() {
         lorenzCtx.moveTo(px1, py1);
         lorenzCtx.lineTo(px2, py2);
     }
-    lorenzCtx.strokeStyle = "rgba(0, 255, 255, 0.8)";
+    lorenzCtx.strokeStyle = "rgba(255, 255, 255, 0.8)";
     lorenzCtx.lineWidth = 1;
     lorenzCtx.stroke();
 
@@ -291,7 +292,7 @@ function updateLorenzOverlay() {
         lorenzOverlayCtx.moveTo(px1, py1);
         lorenzOverlayCtx.lineTo(px2, py2);
     }
-    lorenzOverlayCtx.strokeStyle = "rgba(0, 255, 255, 0.8)";
+    lorenzOverlayCtx.strokeStyle = "rgba(255, 255, 255, 0.8)";
     lorenzOverlayCtx.lineWidth = 1;
     lorenzOverlayCtx.stroke();
 

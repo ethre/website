@@ -1,3 +1,6 @@
+/*********************************************/
+/*  About Overlay                            */
+/*********************************************/
 function openAbout() {
   const overlay = document.getElementById("aboutOverlay");
   overlay.classList.add("show");
@@ -71,20 +74,34 @@ function closePhotography() {
 /*********************************************/
 function handleKeydown(event) {
   if (event.key === "Escape") { // Check if the Escape key was pressed
-    const modal = document.getElementById("imageModal");
+    // Check and close About Overlay
+    const aboutOverlay = document.getElementById("aboutOverlay");
+    if (aboutOverlay && aboutOverlay.classList.contains("show")) {
+      closeAbout();
+    }
 
-    // Close image modal if it's open
-    if (!modal.classList.contains("hidden")) {
+    // Check and close Contact Overlay
+    const contactOverlay = document.getElementById("contactOverlay");
+    if (contactOverlay && contactOverlay.classList.contains("show")) {
+      closeContact();
+    }
+
+    // Check and close Image Modal
+    const imageModal = document.getElementById("imageModal");
+    if (imageModal && !imageModal.classList.contains("hidden")) {
       closeImageModal();
+    }
+
+    // Check and close Photography Overlay
+    const photographyOverlay = document.getElementById("photographyOverlay");
+    if (photographyOverlay && photographyOverlay.classList.contains("show")) {
+      closePhotography();
     }
   }
 }
 
 // Attach the keydown event listener to the document
 document.addEventListener("keydown", handleKeydown);
-
-// Ensure that openPhotography() is called when you click on the 
-// "Photography" navbar link, just like you do with openGallery().
 
 // Expose functions globally if needed for inline onClick attributes
 window.openAbout = openAbout;
@@ -95,4 +112,3 @@ window.openImageModal = openImageModal;
 window.closeImageModal = closeImageModal;
 window.openPhotography = openPhotography;
 window.closePhotography = closePhotography;
-
