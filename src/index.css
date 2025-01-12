@@ -1781,7 +1781,6 @@ body {
 
   #aboutOverlay img {
     max-width: 100%;
-    padding-bottom: 2rem;
   }
 
   #contactOverlay {
@@ -2066,4 +2065,8 @@ body {
   .hideForMobile {
     display: none;
   }
+}
+
+.myPicture{
+  border: 1px solid #000;
 }
